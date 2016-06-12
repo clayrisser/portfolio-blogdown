@@ -19,10 +19,10 @@ if ( $githubEvent == 'push' ) {
 	}
 }
 if ( $success ) {
-	echo 'Pulled from repo successfully for ' + $githubDelivery + '.';
+	echo 'Pulled from repo successfully for '.$githubDelivery.'.';
 } else {
 	echo 'Failed to pull from repo successfully.';
 }
-echo $githubEvent;
-echo $githubSignature;
-echo $githubDelivery;
+echo 'event: '.$githubEvent;
+echo 'sig: '.$githubSignature;
+echo 'deliv: '.$githubDelivery;
