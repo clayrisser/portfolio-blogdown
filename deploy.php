@@ -1,15 +1,15 @@
 <?php
 
 /* Settings */
-$secret = false;
+$signature = false;
 $customDirectory = false;
 
 $success = false;
 $githubEvent = $_SERVER['HTTP_X_GITHUB_EVENT'];
-$githubSignature = $_SERVER['X-Hub-Signature'];
-$githubDelivery = $_SERVER['X-GitHub-Delivery'];
+$githubSignature = $_SERVER['HTTP_X_HUB_SIGNATURE'];
+$githubDelivery = $_SERVER['HTTP_X_GITHUB_DELIVERY'];
 if ( $githubEvent == 'push' ) {
-	if ( $secret == false || $secret == $githubSignature ) {
+	if ( $signature == false || $signature == $githubSignature ) {
 		$directory = getcwd();
 		if ( $customDirectory ) {
 			$directory = $customDirectory;
