@@ -1,0 +1,71 @@
+[
+  {
+    "title": "BlogDown",
+    "author": "jamrizzi",
+    "status": "published",
+    "featuredImage": true,
+    "viewProject": "https://github.com/jamrizzi/BlogDown",
+    "description": "BlogDown is a blazing fast frontend blogging platform that I built with Polymer. In fact, this very website is running on BlogDown."
+  },
+  {
+    "title": "Rizzi Guestbook",
+    "author": "jamrizzi",
+    "status": "published",
+    "featuredImage": true,
+    "viewProject": "https://wordpress.org/plugins/rizzi-guestbook/",
+    "description": "Rizzi Guestbook is a WordPress plugin that creates a stunning guestbook or testimonial page using the built in WordPress comment system. It has had over 20,000 downloads."
+  },
+  {
+    "title": "ihaveaname",
+    "author": "jamrizzi",
+    "status": "published",
+    "featuredImage": true,
+    "viewProject": "http://ihaveaname.info/",
+    "description": "I designed the landing page and made a promotional video for the #ihaveaname campaign, a campaign that was created to reduce the global demand of human trafficking by disrupting online communication utilized by traffickers to recruit clients and victims."
+  },
+  {
+    "title": "PodBuzzz WordPress Plugin",
+    "author": "jamrizzi",
+    "status": "published",
+    "featuredImage": true,
+    "viewProject": "https://wordpress.org/plugins/podbuzzz/",
+    "description": "This WordPress plugin that I built is the official PodBuzzz WordPress plugin."
+  },
+  {
+    "title": "J&C Orthotics",
+    "author": "jamrizzi",
+    "status": "published",
+    "featuredImage": true,
+    "viewProject": "http://jcorthotics.com/",
+    "description": "This is a website that I built for J&C Orthotics and Prosthetics."
+  },
+  {
+    "title": "Hope Baptist Church",
+    "author": "jamrizzi",
+    "status": "published",
+    "featuredImage": false,
+    "viewProject": "http://hopebaptistchurch.org/",
+    "description": "This is a website that I built for Hope Baptist Church and Hope Christian School in Hanover, PA."
+  },
+  {
+    "title": "Americamry",
+    "author": "jamrizzi",
+    "status": "published",
+    "featuredImage": true,
+    "status": "draft"
+  },
+  {
+    "title": "A Jar of Smart Cookies",
+    "author": "jamrizzi",
+    "status": "published",
+    "featuredImage": true,
+    "status": "draft"
+  },
+  {
+    "title": "Simply Global Designs",
+    "author": "jamrizzi",
+    "status": "published",
+    "featuredImage": true,
+    "status": "draft"
+  }
+]

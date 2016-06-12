@@ -1,0 +1,22 @@
+<dom-module id="hard-contact">
+  <template>
+
+    <span>Contact us here.</span>
+    <load-module name="boo"></load-module>
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+      Polymer({
+        is: 'hard-contact',
+        
+        ready: function() {
+
+        }
+      });
+    })();
+  </script>
+
+</dom-module>

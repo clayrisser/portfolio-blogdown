@@ -1,0 +1,398 @@
+<link rel="import" href="../services/service-disqus.dyn.html">
+
+<dom-module id="page-post">
+  <template>
+    <style>
+      .featured-image {
+        --paper-card-header-text: {
+          color: white;
+          font-size: 30px;
+          font-weight: bold;
+        }
+        --paper-card-header-image: {
+          opacity: .5;
+          max-height: 300px;
+        }
+        --paper-card-header: {
+          background-color: black;
+        }
+      }
+    </style>
+    
+    <!-- Has featured image -->
+    <template is="dom-if" if="[[featuredImage]]" restamp>
+      <paper-card class="featured-image" heading="[[post.title]]" image="[[featuredImage]]">
+        <template is="dom-if" if="[[isMD]]" restamp>
+          <div class="card-content">
+            <juicy-markdown value="[[postResponseData]]"></juicy-markdown>
+          </div>
+        </template>
+        <template is="dom-if" if="[[isHTML]]" restamp>
+          <div class="card-content">
+            <template is="juicy-html" content$="[[postResponseData]]"></template>
+          </div>
+        </template>
+        <template is="dom-if" if="[[isPDF]]" restamp>
+          <div class="card-content">
+            <pdf-object file="[[postUrl]]" height="400px"></pdf-object>
+          </div>
+          <div class="card-actions">
+            <paper-button on-click="_download">Fullscreen</paper-button>
+          </div>
+        </template>
+      </paper-card>
+    </template>
+    
+    <!-- No featured image -->
+    <template is="dom-if" if="[[!featuredImage]]" restamp>
+      <paper-card heading="[[post.title]]">
+        <template is="dom-if" if="[[isMD]]" restamp>
+          <div class="card-content">
+            <juicy-markdown value="[[postResponseData]]"></juicy-markdown>
+          </div>
+        </template>
+        <template is="dom-if" if="[[isHTML]]" restamp>
+          <div class="card-content">
+            <template is="juicy-html" content$="[[postResponseData]]"></template>
+          </div>
+        </template>
+        <template is="dom-if" if="[[isPDF]]" restamp>
+          <div class="card-content">
+            <pdf-object file="[[postUrl]]" height="400px"></pdf-object>
+          </div>
+          <div class="card-actions">
+            <paper-button on-click="_download">Fullscreen</paper-button>
+          </div>
+        </template>
+      </paper-card>
+    </template>
+
+    <!-- Disqus commenting -->
+    <template is="dom-if" if="[[enableDisqus]]" restamp>
+      <paper-card heading="Commenting">
+        <div class="card-content">
+          <service-disqus
+            shortname="[[disqusShortname]]"
+            identifier="[[post.datestamp]]"
+            title="[[post.title]]"
+            url="[[url]]"
+            categoryId="[[categoryId]]"
+            https=false
+          ></service-disqus>
+        </div>
+      </paper-card>
+    </template>
+    
+    <iron-ajax id="post"
+      url="[[postUrl]]"
+      handle-as="text"
+      on-response="postResponse"
+      on-error="postError"
+      last-response="{{postResponseData}}"
+    ></iron-ajax>
+    
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+      Polymer({
+        is: 'page-post',
+        
+        properties: {
+          post: {
+            type: Object,
+            observer: '_postChanged'
+          }
+        },
+        
+        _postChanged: function() {
+          this.set('enableDisqus', false);
+          this._determinePost();
+        },
+        
+        _determinePost: function() {
+          var formats = ['md', 'html', 'pdf'];
+          this._formats = [];
+          for (var i = 0; i < formats.length; i++) {
+            if (formats[i] != this.post.format) {
+              this.push('_formats', formats[i]);
+            }
+          }
+          if (app.settings.permlinkMode === 'date') { // date mode
+            this._postUrl = '../../../../../../../../content/posts/' + this.post.slug + '.' + this.post.format;
+            this._checkFile(this._postUrl, function() { // file exists
+              this.postUrl = this._postUrl;
+              this._initPost();
+            }.bind(this), function() { // file doesn't exist
+              this._postUrl = '../../../../../../../../content/posts/' + this.post.slug + '.' + this._formats[0];
+              this._checkFile(this._postUrl, function() { // file exists
+                this.postUrl = this._postUrl;
+                this.post.format = this._formats[0];
+                this._initPost();
+              }.bind(this), function() { // file doesn't exist
+                this._postUrl = '../../../../../../../../content/posts/' + this.post.slug + '.' + this._formats[1];
+                this._checkFile(this._postUrl, function() { // file exists
+                  this.postUrl = this._postUrl;
+                  this.post.format = this._formats[1];
+                  this._initPost();
+                }.bind(this), function() { // file doesn't exist
+                  this._title = this.post.title.toString().toLowerCase().replace(/[^\s\w+\-_#.]/g, '').replace(/\s+/g, '-');
+                  this._postUrl = '../../../../../../../../content/posts/' + this._title + '.' + this.post.format;
+                  this._checkFile(this._postUrl, function() { // file exists
+                    this.postUrl = this._postUrl;
+                    this._initPost();
+                  }.bind(this), function() { // file doesn't exist
+                    this._postUrl = '../../../../../../../../content/posts/' + this._title + '.' + this._formats[0];
+                    this._checkFile(this._postUrl, function() { // file exists
+                      this.postUrl = this._postUrl;
+                      this.post.format = this._formats[0];
+                      this._initPost();
+                    }.bind(this), function() { // file doesn't exist
+                    this._postUrl = '../../../../../../../../content/posts/' + this._title + '.' + this._formats[1];
+                      this._checkFile(this._postUrl, function() { // file exists
+                        this.postUrl = this._postUrl;
+                        this.post.format = this._formats[1];
+                        this._initPost();
+                      }.bind(this), function() { // file doesn't exist
+                        this.postUrl = null;
+                      }.bind(this));
+                    }.bind(this));
+                  }.bind(this));
+                }.bind(this));
+              }.bind(this));
+            }.bind(this));
+          } else { // title mode
+            this._postUrl = '../../../../../../../../content/posts/' + this.post.slug + '.' + this.post.format;
+            this._checkFile(this._postUrl, function() { // file exists
+              this.postUrl = this._postUrl;
+              this._initPost();
+            }.bind(this), function() { // file doesn't exist
+              this._postUrl = '../../../../../../../../content/posts/' + this.post.slug + '.' + this._formats[0];
+              this._checkFile(this._postUrl, function() { // file exists
+                this.postUrl = this._postUrl;
+                this.post.format = this._formats[0];
+                this._initPost();
+              }.bind(this), function() { // file doesn't exist
+                this._postUrl = '../../../../../../../../content/posts/' + this.post.slug + '.' + this._formats[1];
+                this._checkFile(this._postUrl, function() { // file exists
+                  this.postUrl = this._postUrl;
+                  this.post.format = this._formats[1];
+                  this._initPost();
+                }.bind(this), function() { // file doesn't exist
+                  this._postUrl = '../../../../../../../../content/posts/' + this.post.datestamp + '.' + this.post.format;
+                  this._checkFile(this._postUrl, function() { // file exists
+                    this.postUrl = this._postUrl;
+                    this._initPost();
+                  }.bind(this), function() { // file doesn't exist
+                    this._postUrl = '../../../../../../../../content/posts/' + this.post.datestamp + '.' + this._formats[0];
+                    this._checkFile(this._postUrl, function() { // file exists
+                      this.postUrl = this._postUrl;
+                      this.post.format = this._formats[0];
+                      this._initPost();
+                    }.bind(this), function() { // file doesn't exist
+                    this._postUrl = '../../../../../../../../content/posts/' + this.post.datestamp + '.' + this._formats[1];
+                      this._checkFile(this._postUrl, function() { // file exists
+                        this.postUrl = this._postUrl;
+                        this.post.format = this._formats[1];
+                        this._initPost();
+                      }.bind(this), function() { // file doesn't exist
+                        this.postUrl = null;
+                      }.bind(this));
+                    }.bind(this));
+                  }.bind(this));
+                }.bind(this));
+              }.bind(this));
+            }.bind(this));
+          }
+        },
+        
+        _initPost: function() {
+          if (this.post.format === 'md' || this.post.format === 'html') {
+            this.$.post.generateRequest();
+          } else {
+            this._loadPost();
+          }
+          this._determineFeaturedImage();
+        },
+        
+        postResponse: function() {
+          this._loadPost();
+        },
+        
+        postError: function() {
+          var error = 'Error 2: ' + this.post.slug + '.' + this.post.format + ' failed to load';
+          app.debug(error, 'warn');
+          app.toast(error, 'http://blogdown.info/error/2', '_blank');
+        },
+        
+        _loadPost: function() {
+          switch (this.post.format) {
+            case 'md':
+              this._isMD();
+              break;
+            case 'html':
+              this._isHTML();
+              break;
+            case 'pdf':
+              this._isPDF();
+              break;
+            default:
+              app.debug('invalid post case', 'warn');
+          }
+        },
+        
+        _isMD: function() {
+          this.isMD = true;
+          this.isHTML = false;
+          this.isPDF = false;
+          this._contentLoaded();
+        },
+        
+        _isHTML: function() {
+          this.isMD = false;
+          this.isHTML = true;
+          this.isPDF = false;
+          this._contentLoaded();
+        },
+        
+        _isPDF: function() {
+          this.isMD = false;
+          this.isHTML = false;
+          this.isPDF = true;
+          this._contentLoaded();
+        },
+        
+        _determineFeaturedImage: function() {
+          if (this.post.featuredImage) {
+            this._featuredImage = false;
+            if (this.post.featuredImage === true) { // Featured image assumed
+              if (app.settings.permlinkMode === 'date') { // date mode
+                this._featuredImage = '../../../../../../../../content/images/' + this.post.slug + '.jpg';
+                this._checkImage(this._featuredImage, function() { // Image exists
+                  this.featuredImage = this._featuredImage;
+                }.bind(this), function() { // Image doesn't exist
+                  this._featuredImage = '../../../../../../../../content/images/' + this.post.slug + '.png';
+                  this._checkImage(this._featuredImage, function() { // Image exists
+                    this.featuredImage = this._featuredImage;
+                  }.bind(this), function() { // Image doesn't exist
+                    this._title = this.post.title.toString().toLowerCase().replace(/[^\s\w+\-_#.]/g, '').replace(/\s+/g, '-');
+                    this._featuredImage = '../../../../../../../../content/images/' + this._title + '.jpg';
+                    this._checkImage(this._featuredImage, function() { // Image exists
+                      this.featuredImage = this._featuredImage;
+                    }.bind(this), function() { // Image doesn't exist
+                      this._featuredImage = '../../../../../../../../content/images/' + this._title + '.png';
+                      this._checkImage(this._featuredImage, function() { // Image exists
+                        this.featuredImage = this._featuredImage;
+                      }.bind(this), function() { // Image doesn't exist
+                        this.featuredImage = false;
+                      }.bind(this));
+                    }.bind(this));
+                  }.bind(this));
+                }.bind(this));
+              } else { // title mode
+                this._featuredImage = '../../../../../../../../content/images/' + this.post.slug + '.jpg';
+                this._checkImage(this._featuredImage, function() { // Image exists
+                  this.featuredImage = this._featuredImage;
+                }.bind(this), function() { // Image doesn't exist
+                  this._featuredImage = '../../../../../../../../content/images/' + this.post.slug + '.png';
+                  this._checkImage(this._featuredImage, function() { // Image exists
+                    this.featuredImage = this._featuredImage;
+                  }.bind(this), function() { // Image doesn't exist
+                    this._featuredImage = '../../../../../../../../content/images/' + this.post.datestamp + '.jpg';
+                    this._checkImage(this._featuredImage, function() { // Image exists
+                      this.featuredImage = this._featuredImage;
+                    }.bind(this), function() { // Image doesn't exist
+                      this._featuredImage = '../../../../../../../../content/images/' + this.post.datestamp + '.png';
+                      this._checkImage(this._featuredImage, function() { // Image exists
+                        this.featuredImage = this._featuredImage;
+                      }.bind(this), function() { // Image doesn't exist
+                        this.featuredImage = false;
+                      }.bind(this));
+                    }.bind(this));
+                  }.bind(this));
+                }.bind(this));
+              }
+            } else {
+              if (this._isRelativeUrl(this.post.featuredImage)) { // Relative featured image
+                this._featuredImage = '../../../../../../../../content/images/' + this.post.featuredImage;
+              } else { // Absolute featured image
+                this._featuredImage = this.post.featuredImage;
+              }
+              this._checkImage(this._featuredImage, function() { // Image exists
+                this.featuredImage = this._featuredImage;
+              }.bind(this), function() { // Image doesn't exist
+                this.featuredImage = false;
+              }.bind(this));
+            }
+          } else {
+            this.featuredImage = false;
+          }
+        },
+        
+        _contentLoaded: function() {
+          this._loadDisqus();
+        },
+        
+        _loadDisqus: function() {
+          if (app.settings.disqusShortname) {
+            this.set('disqusShortname', app.settings.disqusShortname);
+            this.set('url', window.location.href);
+            this.set('categoryId', '');
+            window.setTimeout(function() { // Delays enableDisqus long enough to allow restamping
+              this.set('enableDisqus', true);
+            }.bind(this), 1);
+          }
+          this._postLoaded();
+        },
+        
+        _postLoaded: function() {
+          app.debug(this.post.slug + '.' + this.post.format + ' loaded');
+        },
+        
+        _download: function() {
+          window.open(this.postUrl);
+        },
+        
+        _isRelativeUrl: function(url) {
+          var regex = new RegExp('^(?:[a-z]+:)?//', 'i');
+          if (regex.test(url)) { // absolute url
+            return false;
+          } else { // relative url
+            return true;
+          }
+        },
+        
+        _checkFile: function(url, success, error) {
+          var xmlHttpReq = false;
+          var self = this;
+          if (window.XMLHttpRequest) { // Mozilla/Safari
+            self.xmlHttpReq = new XMLHttpRequest();
+          }
+          else if (window.ActiveXObject) { // IE
+            self.xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
+          }
+          self.xmlHttpReq.open('HEAD', url, true);
+          self.xmlHttpReq.onreadystatechange = function() {
+            if (self.xmlHttpReq.readyState == 4) {
+              if (self.xmlHttpReq.status == 200) {
+                success();
+              } else if (self.xmlHttpReq.status == 404) {
+                error();
+              }
+            }
+          }
+          self.xmlHttpReq.send();
+        },
+        
+        _checkImage: function(image, success, error) {
+          var img = new Image();
+          img.onload = success;
+          img.onerror = error;
+          img.src = image;
+        }
+      });
+    })();
+  </script>
+
+</dom-module>
