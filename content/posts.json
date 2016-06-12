@@ -51,21 +51,18 @@
     "title": "Americamry",
     "author": "jamrizzi",
     "status": "published",
-    "featuredImage": true,
-    "status": "draft"
+    "featuredImage": true
   },
   {
     "title": "A Jar of Smart Cookies",
     "author": "jamrizzi",
-    "status": "published",
-    "featuredImage": true,
-    "status": "draft"
+    "status": "draft",
+    "featuredImage": true
   },
   {
     "title": "Simply Global Designs",
     "author": "jamrizzi",
-    "status": "published",
-    "featuredImage": true,
-    "status": "draft"
+    "status": "draft",
+    "featuredImage": true
   }
 ]
