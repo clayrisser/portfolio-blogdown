@@ -1,7 +1,7 @@
 <?php
 
 /* Settings */
-$secret = '123456';
+$secret = false;
 $customDirectory = false;
 
 $success = false;
@@ -23,3 +23,6 @@ if ( $success ) {
 } else {
 	echo 'Failed to pull from repo successfully.';
 }
+echo $githubEvent;
+echo $githubSignature;
+echo $githubDelivery;
