@@ -27,7 +27,7 @@
     "title": "PodBuzzz WordPress Plugin",
     "author": "jamrizzi",
     "status": "published",
-    "featuredImage": true,
+    "featuredImage": false,
     "viewProject": "https://wordpress.org/plugins/podbuzzz/",
     "description": "This WordPress plugin that I built is the official PodBuzzz WordPress plugin."
   },
@@ -35,7 +35,7 @@
     "title": "J&C Orthotics",
     "author": "jamrizzi",
     "status": "published",
-    "featuredImage": true,
+    "featuredImage": false,
     "viewProject": "http://jcorthotics.com/",
     "description": "This is a website that I built for J&C Orthotics and Prosthetics."
   },
@@ -51,18 +51,18 @@
     "title": "Americamry",
     "author": "jamrizzi",
     "status": "published",
-    "featuredImage": true
+    "featuredImage": false
   },
   {
     "title": "A Jar of Smart Cookies",
     "author": "jamrizzi",
     "status": "draft",
-    "featuredImage": true
+    "featuredImage": false
   },
   {
     "title": "Simply Global Designs",
     "author": "jamrizzi",
     "status": "draft",
-    "featuredImage": true
+    "featuredImage": false
   }
 ]
