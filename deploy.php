@@ -5,7 +5,7 @@ $secret = false;
 $customDirectory = false;
 
 $success = false;
-$githubEvent = $_SERVER['X-GitHub-Event'];
+$githubEvent = $_SERVER['HTTP_X_GITHUB_EVENT'];
 $githubSignature = $_SERVER['X-Hub-Signature'];
 $githubDelivery = $_SERVER['X-GitHub-Delivery'];
 if ( $githubEvent == 'push' ) {
