@@ -1,7 +1,7 @@
 <?php
 
 /* Settings */
-$secret = false;
+$secret = '123456';
 $customDirectory = false;
 
 $success = false;
