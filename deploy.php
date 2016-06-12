@@ -19,6 +19,7 @@ if ( $githubEvent == 'push' ) {
 		shell_exec( 'git pull' );
 		shell_exec( 'find ./* -type d -exec chmod 0755 {} \;' );
 		shell_exec( 'find ./* -type f -exec chmod 0644 {} \;' );
+		shell_exec( 'touch bob' );
 		$success = true;
 	}
 }
