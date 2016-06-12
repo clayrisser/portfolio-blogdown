@@ -51,18 +51,25 @@
     "title": "Americamry",
     "author": "jamrizzi",
     "status": "published",
-    "featuredImage": false
+    "featuredImage": false,
+    "viewProject": "http://americamry.com/",
+    "description": "I built this website using a pre-alpha version of BlogDown."
   },
   {
     "title": "A Jar of Smart Cookies",
     "author": "jamrizzi",
-    "status": "draft",
-    "featuredImage": false
+    "status": "published",
+    "featuredImage": false,
+    "viewProject": "http://smartcookie.x10.bz/",
+    "description": "I built this website using WordPress and designed the cookie logo for it."
   },
   {
     "title": "Simply Global Designs",
     "author": "jamrizzi",
     "status": "draft",
-    "featuredImage": false
+    "featuredImage": false,
+    "viewProject": "http://simplyglobaldesigns.com/",
+    "description": "I built this website using WordPress."
+
   }
 ]
