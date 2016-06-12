@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="description" content=""><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Polymer Starter Kit"><title>Jam's Portfolio</title><meta name="theme-color" content="#2E3AA1"><link rel="manifest" href="core/manifest.json"><meta name="msapplication-TileColor" content="#3372DF"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="PSK"><link rel="icon" sizes="192x192" href="core/images/touch/chrome-touch-icon-192x192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="apple-mobile-web-app-title" content="Polymer Starter Kit"><link rel="apple-touch-icon" href="core/images/touch/apple-touch-icon.png"><meta name="msapplication-TileImage" content="core/images/touch/ms-touch-icon-144x144-precomposed.png"><link rel="stylesheet" href="core/styles/main.css"><script>
+    if (window.location.protocol === 'file:') { // Prevents errors when not running on server
+      window.location.href = './core/errors/no-server.html';
+    } else {
+      var url = window.location.href;
+      var slashes = 0;
+      for (var i = 0; i < url.length; i++) {
+        if (url[i] === '/') {
+          slashes++;
+          if (slashes === 3) {
+            if (url[i + 1] && url[i + 1] !== '#' && url[i + 2] !== '!') { // HashBang not found
+              window.location.href = '/#!' + url.substring(i, url.length);
+            }
+            break;
+          }
+        }
+      }
+    }
+  </script><script src="core/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script><link rel="import" href="core/elements/elements.html"><style is="custom-style" include="shared-styles"></style></head><body unresolved=""><template is="dom-bind" id="app"><span id="loading"></span><iron-ajax id="settings" auto="" url="content/settings.json" handle-as="json" on-response="settingsResponse" on-error="settingsError" last-response="{{settings}}"></iron-ajax><template is="dom-if" if="[[loaded]]" restamp=""><initialize-theme id="rootPage" mobile="{{mobile}}" loading="[[loading]]" progress="[[progress]]" page-title="[[pageTitle]]" route-data="[[routeData]]"></initialize-theme></template><paper-toast id="toast" text="[[message]]" duration="[[settings.toastDuration]]"><span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span></paper-toast></template><script src="core/scripts/app.js"></script></body></html>

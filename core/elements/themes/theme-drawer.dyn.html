@@ -1,0 +1,160 @@
+<dom-module id="theme-drawer">
+  <template>
+    <style>
+      .paper-progress-main {
+        width: 100%;
+        --paper-progress-height: 100px;
+        --paper-progress-container-color: rgba(255, 255, 255, 0);
+      }
+      
+      .title {
+        z-index: 0;
+      }
+    </style>
+
+    <paper-drawer-panel id="paperDrawerPanel" narrow="{{mobile}}">
+
+      <!-- Drawer -->
+      <div drawer>
+        <paper-menu selected="[[selected]]">
+          <template is="dom-repeat" items="[[menuItems]]" as="menuItem">
+            <paper-item id="[[menuItem.slug]]" on-click="_goToPage">[[menuItem.title]]</paper-item>
+          </template>
+        </paper-menu>
+      </div>
+      <!-- End Drawer -->
+
+      <!-- Header -->
+      <paper-header-panel id="headerPanelMain" main>
+        <paper-toolbar>
+          <template is="dom-if" if="[[loading]]" restamp>
+            <iron-flex-layout class="fit">
+              <paper-progress class="paper-progress-main" value="[[progress]]" indeterminate="[[_indeterminateLoading]]"></paper-progress>
+            </iron-flex-layout>
+          </template>
+          <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+          <div class="title">[[pageTitle]]</div>
+          <template is="dom-repeat" items="[[_socialAccountsArray]]" as="socialAccount">
+            <paper-icon-button icon="fa:[[socialAccount.type]]" on-click="_goToSocialPage"></paper-icon-button>
+          </template>
+        </paper-toolbar>
+        <!-- End Header -->
+
+        <!-- Content -->
+        <div class="content">
+          <service-content route-data="[[routeData]]"></service-content>
+        </div>
+      </paper-header-panel>
+      <!-- End content -->
+
+    </paper-drawer-panel>
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+      Polymer({
+        is: 'theme-drawer',
+
+        properties: {
+          mobile: {
+            type: Boolean,
+            notify: true
+          },
+          loading: {
+            type: Boolean,
+            value: false
+          },
+          progress: {
+            type: Number,
+            value: -1,
+            observer: '_setIndeterminateLoading'
+          },
+          _indeterminateLoading: {
+            type: Boolean,
+            value: true
+          },
+          routeData: {
+            type: Object,
+            observer: 'routeChanged'
+          }
+        },
+
+        ready: function() {
+          this._loadMenuItems();
+          this._loadSocialAccounts();
+        },
+        
+        attached: function() {
+          this.set('_attached', true);
+          this.routeChanged();
+        },
+        
+        /*!!! this needs encapsulated !!!*/
+        routeChanged: function() { 
+          if (this._attached) {
+            for (var i = 0; i < this.menuItems.length; i++) { // Automatically select menuItem
+              var route = '/' + this.routeData.slugs.page;
+              if (this.routeData.slugs.child) {
+                route = '/' + this.routeData.slugs.page + 's';
+              }
+              if (this.menuItems[i].route === route) {
+                this.set('selected', i);
+              }
+            }
+            this.$.paperDrawerPanel.closeDrawer();
+          }
+        },
+        /*!!!*/
+
+        _goToPage: function(e) {
+          var model = e.model;
+          app.goTo(model.menuItem.route);
+        },
+
+        _goToSocialPage: function(e) {
+          var model = e.model;
+          window.open(model.socialAccount.url);
+        },
+
+        _setIndeterminateLoading: function() {
+          if (this.progress >= 0) {
+            this._indeterminateLoading = false;
+          } else {
+            this._indeterminateLoading = true;
+          }
+        },
+        
+        _loadMenuItems: function() {
+          this.menuItems = [];
+          for (var i = 0; i < app.pages.length; i++) {
+            if (app.pages[i].addToMenu) {
+              var menuItem = {
+                title: app.pages[i].title,
+                route: app.pages[i].route
+              }
+              this.push('menuItems', menuItem);
+            }
+          }
+        },
+
+        _loadSocialAccounts: function() {
+          this._socialAccountsArray = [];
+          if (app.settings.socialAccounts) {
+            var socialAccounts = app.settings.socialAccounts;
+            for (var socialAccount in socialAccounts) {
+              if (socialAccounts.hasOwnProperty(socialAccount)) {
+                this.push('_socialAccountsArray', {
+                  type: socialAccount,
+                  url: socialAccounts[socialAccount]
+                });
+              }
+            }
+          }
+        }
+      });
+    })();
+  </script>
+
+</dom-module>

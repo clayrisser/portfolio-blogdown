@@ -1,0 +1,44 @@
+{
+  "title": "Jam's Portfolio",
+  "debugging": "false",
+  "easterEggs": "false",
+  "ajaxTimeout": "10000",
+  "toastDuration": "5000",
+  "theme": "drawer",
+  "permlinkMode": "title",
+  "socialAccounts": {
+    "github": "https://github.com/jamrizzi",
+    "linkedin": "https://www.linkedin.com/in/jamrizzi",
+    "facebook": "https://www.facebook.com/profile.php?id=100008664758647",
+    "twitter": "https://twitter.com/jamrizzi",
+    "google-plus": "https://plus.google.com/+BenjaminRisserJam"
+  },
+  "softPages": [
+    {
+      "title": "Resume",
+      "format": "pdf",
+      "addToMenu": true
+    }
+  ],
+  "hardPages": [
+    {
+      "title": "Home",
+      "addToMenu": false,
+      "redirect": "posts"
+    },
+    {
+      "title": "Posts",
+      "addToMenu": true,
+      "rename": "Projects"
+    },
+    {
+      "title": "Search",
+      "addToMenu": false
+    },
+    {
+      "title": "Contact",
+      "addToMenu": false
+    }
+  ],
+  "disqusShortname": false
+}
