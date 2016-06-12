@@ -5,8 +5,11 @@ $secret = false;
 $customDirectory = false;
 
 $success = false;
-if ( $_SERVER['HTTP_X_GITHUB_EVENT'] == 'push' ) {
-	if ( $secret == false || $secret == $_SERVER['X-Hub-Signature'] ) {
+$githubEvent = $_SERVER['X-GitHub-Event'];
+$githubSignature = $_SERVER['X-Hub-Signature'];
+$githubDelivery = $_SERVER['X-GitHub-Delivery'];
+if ( $githubEvent == 'push' ) {
+	if ( $secret == false || $secret == $githubSignature ) {
 		$directory = getcwd();
 		if ( $customDirectory ) {
 			$directory = $customDirectory;
@@ -16,7 +19,7 @@ if ( $_SERVER['HTTP_X_GITHUB_EVENT'] == 'push' ) {
 	}
 }
 if ($success) {
-	echo 'Pulled from repo successfully for ' + $_SERVER['X-GitHub-Delivery'] + '.';
+	echo 'Pulled from repo successfully for ' + $githubDelivery + '.';
 } else {
 	echo 'Failed to pull from repo successfully.';
 }
