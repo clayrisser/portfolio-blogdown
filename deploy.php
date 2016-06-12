@@ -18,7 +18,7 @@ if ( $githubEvent == 'push' ) {
 		$success = true;
 	}
 }
-if ($success) {
+if ( $success ) {
 	echo 'Pulled from repo successfully for ' + $githubDelivery + '.';
 } else {
 	echo 'Failed to pull from repo successfully.';
