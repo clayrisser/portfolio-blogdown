@@ -1,7 +1,7 @@
 <?php
 
 /* Settings */
-$signature = false;
+$secret = false;
 $customDirectory = false;
 
 $success = false;
@@ -9,7 +9,7 @@ $githubEvent = $_SERVER['HTTP_X_GITHUB_EVENT'];
 $githubSignature = $_SERVER['HTTP_X_HUB_SIGNATURE'];
 $githubDelivery = $_SERVER['HTTP_X_GITHUB_DELIVERY'];
 if ( $githubEvent == 'push' ) {
-	if ( $signature == false || $signature == $githubSignature ) {
+	if ( $secret == false || $secret == $githubSignature ) {
 		$directory = getcwd();
 		if ( $customDirectory ) {
 			$directory = $customDirectory;
@@ -23,6 +23,3 @@ if ( $success ) {
 } else {
 	echo 'Failed to pull from repo successfully.';
 }
-echo 'event: '.$githubEvent;
-echo 'sig: '.$githubSignature;
-echo 'deliv: '.$githubDelivery;
