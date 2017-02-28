@@ -1,0 +1,13 @@
+[
+  {
+    "slug": "home",
+    "addToMenu": false,
+    "format": "dyn"
+  },
+  {
+    "title": "Resume",
+    "slug": "resume",
+    "addToMenu": true,
+    "format": "pdf"
+  }
+]

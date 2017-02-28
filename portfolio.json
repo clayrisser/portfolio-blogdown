@@ -1,0 +1,9 @@
+[
+  {
+    "title": "BlogDown",
+    "date": "feb 12, 2017",
+    "status": "published",
+    "featuredImage": false,
+    "description": "BlogDown is a blazing fast front-end blogging platform built with Polymer. In fact, this very website is running on BlogDown."
+  }
+]
