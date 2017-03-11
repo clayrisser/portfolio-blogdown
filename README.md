@@ -14,5 +14,3 @@ I am in the process of building out my portfolio. I will eventually be hosted at
 
 
 
-
-
