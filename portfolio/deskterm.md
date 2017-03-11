@@ -14,4 +14,5 @@ Devils Pie uses. I also wrote an installer for it in bash.
 
 ## What I Learned
 
-I learned what little bit of Lua I know, and had a bunch of fun writing the simple bash installer.
+I learned what little bit of Lua I know, and had a bunch of fun writing the simple bash installer. This is also my first
+Linux program, aside from web servers :).
