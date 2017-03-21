@@ -12,11 +12,5 @@
 * [Posts](posts.md)
   * [Top 5 Most Important Emerging Web Technologies for 2017](posts/top-5-most-important-emerging-web-technologies-for-2017.md)
 
-## Deskterm
 
-## NestedPop
-
-## ReactGantt
-
-## Rizzi Guestbook
 
