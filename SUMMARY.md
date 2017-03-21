@@ -1,12 +1,22 @@
-### [BlogDown](/portfolio/blogdown.md)
+# Summary
 
-### [Deskterm](/portfolio/deskterm.md)
+## BlogDown
 
-### [NestedPop](/portfolio/nested-pop.md)
+* [Introduction](README.md)
+* [Portfolio](portfolio.md)
+  * [BlogDown](portfolio/blogdown.md)
+  * [Deskterm](portfolio/deskterm.md)
+  * [Nested Pop](portfolio/nested-pop.md)
+  * [React Gantt](portfolio/react-gantt.md)
+  * [Rizzi Guestbook](portfolio/rizzi-guestbook.md)
+* [Posts](posts.md)
+  * [Top 5 Most Important Emerging Web Technologies for 2017](posts/top-5-most-important-emerging-web-technologies-for-2017.md)
 
-### [ReactGantt](/portfolio/react-gantt.md)
+## Deskterm
 
-### [Rizzi Guestbook](/portfolio/rizzi-guestbook.md)
+## NestedPop
 
+## ReactGantt
 
+## Rizzi Guestbook
 
