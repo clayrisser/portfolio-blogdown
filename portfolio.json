@@ -7,15 +7,23 @@
     "description": "BlogDown is a blazing fast front-end blogging platform built with Polymer. In fact, this very website is running on BlogDown."
   },
   {
-    "title": "Deskterm"
+    "title": "Deskterm",
+    "status": "published",
+    "author": "jamrizzi"
   },
   {
-    "title": "NestedPop"
+    "title": "NestedPop",
+    "status": "published",
+    "author": "jamrizzi"
   },
   {
-    "title": "Rizzi Guestbook"
+    "title": "Rizzi Guestbook",
+    "status": "published",
+    "author": "jamrizzi"
   },
   {
-    "title": "ReactGantt"
+    "title": "ReactGantt",
+    "status": "published",
+    "author": "jamrizzi"
   }
 ]

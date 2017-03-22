@@ -8,6 +8,6 @@
     "title": "Resume",
     "slug": "resume",
     "addToMenu": true,
-    "format": "pdf"
+    "format": "md"
   }
 ]
