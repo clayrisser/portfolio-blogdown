@@ -5,7 +5,7 @@
     "status": "published",
     "featuredImage": true,
     "author": "jamrizzi",
-    "description": "BlogDown is a blazing fast front-end blogging platform built with Polymer. In fact, this very website is running on BlogDown."
+    "description": "BlogDown is a back-end agnostic, zero compilation, markdown blogging platform."
   },
   {
     "title": "Deskterm",

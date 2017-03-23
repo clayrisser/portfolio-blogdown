@@ -1,6 +1,6 @@
 ## Description
 
-[BlogDown](https://github.com/thingdown/blogdown) is a blazing fast front-end blogging platform anyone can use with a
+[BlogDown](https://github.com/thingdown/blogdown) is a back-end agnostic, zero compilation, markdown blogging platform.
 bit of markdown magic. In fact, this very website is built using [BlogDown](https://github.com/thingdown/blogdown).
 It supports custom themes, styles, modules, and taxonomies. BlogDown is unique in the aspect that it is back-end agnostic.
 It can run on any web back-end \([apache](http://httpd.apache.org/), [nginx](https://www.nginx.com/),
