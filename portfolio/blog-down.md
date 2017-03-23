@@ -16,6 +16,6 @@ and can even function directly off of file servers.
 ## What I Learned
 
 I gained a very solid grasp of Google's new front-end framework, [Polymer](https://www.polymer-project.org/).
-The idea of web components is a concept that I thankful to have when I started learning React.  To this day, I greatly
-appreciate the encapsulation that componentized development brings to the world of front-end web development.
+The idea of web components is a concept that I was thankful to have when I started learning React.  To this day, I greatly
+appreciate the encapsulation that componentized development brings to the world of front-end.
 I definitely like my code DRY \(don't repeat yourself\).
