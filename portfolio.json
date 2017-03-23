@@ -12,27 +12,31 @@
     "date": "aug 15, 2016",
     "status": "published",
     "featuredImage": true,
-    "author": "jamrizzi"
+    "author": "jamrizzi",
+    "description": "DeskTerm turns a desktop in a Gnome3 shell on Debian based Linux operating systems into a terminal."
   },
   {
     "title": "NestedPop",
     "date": "oct 17, 2016",
     "status": "published",
     "featuredImage": false,
-    "author": "jamrizzi"
+    "author": "jamrizzi",
+    "description": "NestedPop is a promise based module that populates grandchildren for Waterline."
   },
   {
     "title": "ReactGantt",
     "date": "jul 27, 2016",
     "status": "published",
     "featuredImage": true,
-    "author": "jamrizzi"
+    "author": "jamrizzi",
+    "description": "ReactGantt is simply a gantt chart for react."
   },
   {
     "title": "Rizzi Guestbook",
     "date": "feb 17, 2014",
     "status": "published",
     "featuredImage": true,
-    "author": "jamrizzi"
+    "author": "jamrizzi",
+    "description": "RizziGuestbook is a WordPress plugin that creates a stunning guestbook or testimonial page, using the built in WordPress commenting system."
   }
 ]
