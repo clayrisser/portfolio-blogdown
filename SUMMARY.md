@@ -11,8 +11,7 @@
   * [Rizzi Guestbook](portfolio/rizzi-guestbook.md)
 * [Posts](posts.md)
   * [Top 5 Most Important Emerging Web Technologies for 2017](posts/top-5-most-important-emerging-web-technologies-for-2017.md)
+  * [The Origins of Reaction](posts/the-origins-of-reaction.md)
 * [Pages](pages.md)
   * [Resume](pages/resume.md)
-
-
 
