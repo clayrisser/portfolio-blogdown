@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Home",
+    "slug": "home",
+    "format": "md",
+    "addToMenu": false,
+    "display": "theme",
+    "featuredImage": false
+  },
+  {
+    "title": "Markdown Page",
+    "slug": "markdown-page",
+    "format": "md",
+    "addToMenu": true,
+    "display": "theme",
+    "featuredImage": false
+  },
+  {
+    "title": "HTML Page",
+    "slug": "html-page",
+    "format": "html",
+    "addToMenu": true,
+    "display": "theme",
+    "featuredImage": false
+  },
+  {
+    "title": "PDF Page",
+    "slug": "pdf-page",
+    "format": "pdf",
+    "addToMenu": true,
+    "display": "theme",
+    "featuredImage": false
+  },
+  {
+    "title": "Viewport Example",
+    "slug": "viewport-example",
+    "format": "md",
+    "addToMenu": true,
+    "display": "viewport",
+    "featuredImage": false
+  }
+]
