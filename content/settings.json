@@ -22,6 +22,11 @@
       "name": "posts",
       "singularForm": "post",
       "comment": false
+    },
+    {
+      "name": "portfolio",
+      "singularForm": "item",
+      "comment": false
     }
   ],
   "modules": {
