@@ -1,13 +1,13 @@
 {
-  "title": "BlogDown",
+  "title": "Jam's Portfolio",
   "version": "0.1.9",
   "dateFormat": "MMMM D, YYYY",
   "cacheBusting": "session",
   "debug": false,
   "hashbang": true,
   "permlinkMode": "title",
-  "style": "default",
-  "theme": ["blogdown2017", {
+  "style": "nerd",
+  "theme": ["nerd-portfolio", {
     "pageTransition": "scale-up-animation",
     "toastDuration": 5000,
     "socialAccounts": {
@@ -15,7 +15,9 @@
       "twitter": "https://twitter.com/jamrizzi",
       "google-plus": "https://plus.google.com/+BenjaminRisserJam",
       "github": "https://github.com/jamrizzi"
-    }
+    },
+    "githubUser": "jamrizzi",
+    "into": "Howdy, I'm Jam Risser, a full-stack developer from Austin, TX"
   }],
   "taxonomies": [
     {
