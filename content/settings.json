@@ -3,7 +3,7 @@
   "version": "0.1.9",
   "dateFormat": "MMMM D, YYYY",
   "cacheBusting": "session",
-  "debug": false,
+  "debug": true,
   "hashbang": true,
   "permlinkMode": "title",
   "style": "nerd",
